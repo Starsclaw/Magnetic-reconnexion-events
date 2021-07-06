@@ -14,7 +14,12 @@ from spacepy import pycdf
 # Input year and date format to search
 Année = input('Entrez une année')
 Format1 = input('Entrez une date mmdd')
-
+Filepathshort=input('Copy paste the filepath to where you want to save the plots for the short timewindow')
+Filepathshort=Filepathshort.replace('\\','/')
+Filepathlong=input('Copy paste the filepath to where you want to save the plots for the long timewindow')
+Filepathlong=Filepathlong.replace('\\','/')
+Filepathday=input('Copy paste the filepath to where you want to save the plots for the day')
+Filepathday=Filepathday.replace('\\','/')
 # Import cdf from FIELD(with magnetic field)
 cdf1 = pycdf.CDF(
     'C:/Users/sauge/PycharmProjects/pythonProject1/Donnees/mag_rtn/' + Année + '/psp_fld_l2_mag_rtn_' + Année + Format1 + '00_v01.cdf')
@@ -357,7 +362,7 @@ for values in Drop_Grouped_60s.index:
     values = values.replace('.', '_')
 
     # Choose where do you want to save it
-    plt.savefig('C:/Users/sauge/Desktop/Graphs/encounter4withvectors/2401/short/' + str(values) + '.pdf', format='pdf')
+    plt.savefig(Filepathshort+'/' + str(values) + '.pdf', format='pdf')
     plt.show()
 
     # LONG GRAPH
@@ -435,8 +440,7 @@ for values in Drop_Grouped_60s.index:
     axes[14].set_ylabel('δV R-N', fontsize=7)
     plt.xticks(rotation=90, size=9)
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
-    plt.savefig('C:/Users/sauge/Desktop/Graphs/encounter4withvectors/2401/long/Graphelong' + str(values) + '.pdf',
-                format='pdf')
+    plt.savefig(Filepathlong+'/Graphelong' + str(values) + '.pdf',format='pdf')
     plt.show()
 
 # Making the subplots FOR DAYGRAPH
@@ -518,6 +522,6 @@ graph[14].set_ylabel('δV R-N', fontsize=7)
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
 # Rotation is important without, the datas are covered
 plt.xticks(rotation=90, size=8)
-plt.savefig('C:/Users/sauge/Desktop/Graphs/encounter4withvectors/2401/day/' + str(Format1) + '.pdf', format='pdf')
+plt.savefig(Filepathday+'/' + str(Format1) + '.pdf', format='pdf')
 plt.show()
 plt.close()
