@@ -263,7 +263,7 @@ for values in Drop_Grouped_60s.index:
     MR_Time = Desired_Table.loc[Timewindowstart: Timewindowend]
 
     # SHORT GRAPH
-    fig, axes = plt.subplots(15, 1, sharex=True, figsize=(11, 11))
+    fig, axes = plt.subplots(14, 1, sharex=True, figsize=(11, 11))
     for nn, ax in enumerate(axes):
         # Number of ticks set to be precise as possible
         yticks = matplotlib.ticker.MaxNLocator(6, min_n_ticks=5)
@@ -300,17 +300,15 @@ for values in Drop_Grouped_60s.index:
                       markersize=0.000001, color='cyan')
     axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1,
                       markersize=0.000001, color='orange')
-    axes[9].plot_date(MR_Time['Absolute_Time'], MR_Time['Vtot'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='yellow')
-    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
+    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
                     width=0.001)
-    axes[11].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
+    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
                     width=0.001)
-    axes[12].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
+    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
                        color='red')
-    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
+    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
                     width=0.001)
-    axes[14].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
+    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
                     width=0.001)
     # Legend the plots for when there are several datas plotted at the same time in the same graph
     axes[1].legend(loc='upper right', prop={"size": 7})
@@ -329,12 +327,11 @@ for values in Drop_Grouped_60s.index:
     axes[6].set_ylabel('Alfvén\nspeed(Km/s)', fontsize=7)
     axes[7].set_ylabel('PlasmaBeta\n(SI)', fontsize=7)
     axes[8].set_ylabel('Total \nPressure(Pa)', fontsize=7)
-    axes[9].set_ylabel('Vdiff\n(Km/s)', fontsize=7)
-    axes[10].set_ylabel('δb R-T', fontsize=7)
-    axes[11].set_ylabel('δb R-N', fontsize=7)
-    axes[12].set_ylabel('sigmac\n (unitless)', fontsize=7)
-    axes[13].set_ylabel('δV R-T', fontsize=7)
-    axes[14].set_ylabel('δV R-N', fontsize=7)
+    axes[9].set_ylabel('δb R-T', fontsize=7)
+    axes[10].set_ylabel('δb R-N', fontsize=7)
+    axes[11].set_ylabel('sigmac\n (unitless)', fontsize=7)
+    axes[12].set_ylabel('δV R-T', fontsize=7)
+    axes[13].set_ylabel('δV R-N', fontsize=7)
 
     # To get the information on the datetime rotation is needed unless datetime covers each others
     plt.xticks(rotation=90, size=9)
@@ -351,13 +348,13 @@ for values in Drop_Grouped_60s.index:
     # LONG GRAPH
     # Replace the previous MR_Time with a .loc on a larger time window
     MR_Time = Desired_Table.loc[Timewindowstartlong: Timewindowendlong]
-    fig, axes = plt.subplots(15, 1, sharex=True, figsize=(11, 11))
+    fig, axes = plt.subplots(14, 1, sharex=True, figsize=(11, 11))
     for nn, ax in enumerate(axes):
         # Number of ticks set to be precise as possible
         yticks = matplotlib.ticker.MaxNLocator(6, min_n_ticks=5)
         ax.yaxis.set_major_locator(yticks)
         ax.tick_params(axis='y', labelsize=8)
-    axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,
+       axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,
                       color='purple')
     axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Br'], linestyle='solid', linewidth=1, markersize=0.000001,
                       color='red', label='Br')
@@ -387,18 +384,17 @@ for values in Drop_Grouped_60s.index:
                       markersize=0.000001, color='cyan')
     axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1,
                       markersize=0.000001, color='orange')
-    axes[9].plot_date(MR_Time['Absolute_Time'], MR_Time['Vtot'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='yellow')
-    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
+    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
                     width=0.001)
-    axes[11].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
+    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
                     width=0.001)
-    axes[12].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
+    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
                        color='red')
-    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
+    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
                     width=0.001)
-    axes[14].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
+    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
                     width=0.001)
+    # Legend the plots for when there are several datas plotted at the same time in the same graph
     axes[1].legend(loc='upper right', prop={"size": 7})
     axes[3].legend(loc='upper right', prop={"size": 7})
     axes[6].legend(loc='upper right', prop={"size": 6})
@@ -415,19 +411,18 @@ for values in Drop_Grouped_60s.index:
     axes[6].set_ylabel('Alfvén\nspeed(Km/s)', fontsize=7)
     axes[7].set_ylabel('PlasmaBeta\n(SI)', fontsize=7)
     axes[8].set_ylabel('Total \nPressure(Pa)', fontsize=7)
-    axes[9].set_ylabel('Vdiff\n(Km/s)', fontsize=7)
-    axes[10].set_ylabel('δb R-T', fontsize=7)
-    axes[11].set_ylabel('δb R-N', fontsize=7)
-    axes[12].set_ylabel('sigmac\n (unitless)', fontsize=7)
-    axes[13].set_ylabel('δV R-T', fontsize=7)
-    axes[14].set_ylabel('δV R-N', fontsize=7)
+    axes[9].set_ylabel('δb R-T', fontsize=7)
+    axes[10].set_ylabel('δb R-N', fontsize=7)
+    axes[11].set_ylabel('sigmac\n (unitless)', fontsize=7)
+    axes[12].set_ylabel('δV R-T', fontsize=7)
+    axes[13].set_ylabel('δV R-N', fontsize=7)
     plt.xticks(rotation=90, size=9)
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
     plt.savefig(Filepathlong+'/Graphelong' + str(values) + '.pdf',format='pdf')
     plt.show()
 
 # Making the subplots FOR DAYGRAPH
-figuree, graph = plt.subplots(15, 1, sharex=True, figsize=(11, 11))
+figuree, graph = plt.subplots(14, 1, sharex=True, figsize=(11, 11))
 for nn, ax in enumerate(graph):
     # Number of ticks set to be precise as possible
     locator = mdates.AutoDateLocator(minticks=10, maxticks=15)
@@ -462,21 +457,19 @@ graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaT'], linesty
                    markersize=0.000001, color='blue', label='VaT')
 graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaN'], linestyle='solid', linewidth=0.2,
                    markersize=0.000001, color='orange', label='VaN')
-graph[7].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Vtot'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='green')
-graph[8].plot_date(Desired_Table['Absolute_Time'], Desired_Table['PlasmaBeta'], linestyle='solid', linewidth=0.2,
+graph[7].plot_date(Desired_Table['Absolute_Time'], Desired_Table['PlasmaBeta'], linestyle='solid', linewidth=0.2,
                    markersize=0.0001, color='cyan')
-graph[9].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Total_Pressure'], linestyle='solid', linewidth=0.2,
+graph[8].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Total_Pressure'], linestyle='solid', linewidth=0.2,
                    markersize=0.000001, color='orange')
-graph[10].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
+graph[9].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
                  Desired_Table['DeltaVaT'], angles='uv', width=0.001)
-graph[11].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
+graph[10].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
                  Desired_Table['DeltaVaN'], angles='uv', width=0.001)
-graph[12].plot_date(Desired_Table['Absolute_Time'], Desired_Table['sigmac'], linestyle='solid', linewidth=0.01,
+graph[11].plot_date(Desired_Table['Absolute_Time'], Desired_Table['sigmac'], linestyle='solid', linewidth=0.01,
                     markersize=0.000001, color='red')
-graph[13].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
+graph[12].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
                  Desired_Table['DeltaVT'], angles='uv')
-graph[14].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
+graph[13].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
                  Desired_Table['DeltaVN'], angles='uv')
 
 graph[1].legend(loc='upper right', prop={"size": 7})
@@ -493,14 +486,13 @@ graph[4].set_ylabel('Density \n(m^3)', fontsize=7)
 graph[5].set_ylabel('Temperature\n(K)', fontsize=7)
 graph[5].tick_params(axis='y', which='major', labelsize=8)
 graph[6].set_ylabel('Alfvén\nspeed(Km/s)', fontsize=7)
-graph[7].set_ylabel('Vdiff\n(Km/s)', fontsize=7)
-graph[8].set_ylabel('PlasmaBeta\n(SI)', fontsize=7)
-graph[9].set_ylabel('Total \nPressure(Pa)', fontsize=7)
-graph[10].set_ylabel('δb R-T', fontsize=7)
-graph[11].set_ylabel('δb R-N', fontsize=7)
-graph[12].set_ylabel('sigmac\n (unitless)', fontsize=7)
-graph[13].set_ylabel('δV R-T', fontsize=7)
-graph[14].set_ylabel('δV R-N', fontsize=7)
+graph[7].set_ylabel('PlasmaBeta\n(SI)', fontsize=7)
+graph[8].set_ylabel('Total \nPressure(Pa)', fontsize=7)
+graph[9].set_ylabel('δb R-T', fontsize=7)
+graph[10].set_ylabel('δb R-N', fontsize=7)
+graph[11].set_ylabel('sigmac\n (unitless)', fontsize=7)
+graph[12].set_ylabel('δV R-T', fontsize=7)
+graph[13].set_ylabel('δV R-N', fontsize=7)
 # Date format unless we only have the year of the values on the plot
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M:%S'))
 # Rotation is important without, the datas are covered
