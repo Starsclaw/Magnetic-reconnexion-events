@@ -43,21 +43,13 @@ data1 = pycdf.CDF(
 
 # Make dataframes of each components of magnetic field for the whole day
 df_magnetic_field_modified1 = pd.DataFrame(cdf1['psp_fld_l2_mag_RTN'], columns=['Br', "Bt", 'Bn'])
-df_magnetic_field_modified1['|B|'] = np.sqrt(
-    df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1[
-        'Bn'] ** 2)
+df_magnetic_field_modified1['|B|'] = np.sqrt(df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1['Bn'] ** 2)
 df_magnetic_field_modified2 = pd.DataFrame(cdf2['psp_fld_l2_mag_RTN'], columns=['Br', "Bt", 'Bn'])
-df_magnetic_field_modified2['|B|'] = np.sqrt(
-    df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1[
-        'Bn'] ** 2)
+df_magnetic_field_modified2['|B|'] = np.sqrt(df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1['Bn'] ** 2)
 df_magnetic_field_modified3 = pd.DataFrame(cdf3['psp_fld_l2_mag_RTN'], columns=['Br', "Bt", 'Bn'])
-df_magnetic_field_modified3['|B|'] = np.sqrt(
-    df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1[
-        'Bn'] ** 2)
+df_magnetic_field_modified3['|B|'] = np.sqrt(df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1['Bn'] ** 2)
 df_magnetic_field_modified4 = pd.DataFrame(cdf4['psp_fld_l2_mag_RTN'], columns=['Br', "Bt", 'Bn'])
-df_magnetic_field_modified4['|B|'] = np.sqrt(
-    df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1[
-        'Bn'] ** 2)
+df_magnetic_field_modified4['|B|'] = np.sqrt(df_magnetic_field_modified1['Br'] ** 2 + df_magnetic_field_modified1['Bt'] ** 2 + df_magnetic_field_modified1['Bn'] ** 2)
 
 # To see columns and rows
 pd.set_option('display.max_columns', None)
@@ -76,8 +68,7 @@ df_magnetic_field_modified3 = df_time3.join(df_magnetic_field_modified3)
 df_time4 = pd.DataFrame(pd.to_datetime(cdf4['epoch_mag_RTN']), columns=['Time_datetime'])
 df_time4['Time'] = df_time4['Time_datetime']
 df_magnetic_field_modified4 = df_time4.join(df_magnetic_field_modified4)
-final_df = pd.concat([df_magnetic_field_modified1, df_magnetic_field_modified2, df_magnetic_field_modified3,
-                      df_magnetic_field_modified4], ignore_index=True)
+final_df = pd.concat([df_magnetic_field_modified1, df_magnetic_field_modified2, df_magnetic_field_modified3,df_magnetic_field_modified4], ignore_index=True)
 final_df = final_df.set_index(final_df['Time'])
 
 # Transform the time datas,velocity,density and thermal speed to dataframe with the correct units
@@ -139,25 +130,17 @@ tableau_modifié = tableau_modifié.set_index('Absolute_Time_index')
 Desired_Table = tableau_modifié
 
 # PLASMA PARAMETERS
-Desired_Table['Alfvén_speed'] = ((Desired_Table['|B|'] * 10 ** -9) * (10 ** -3)) / (
-    np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] * (1.6726 * 10 ** -27)))
-Desired_Table['VaR'] = ((Desired_Table['Br'] * 10 ** -9) * (10 ** -3)) / (
-    np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] * (1.6726 * 10 ** -27)))
-Desired_Table['VaT'] = ((Desired_Table['Bt'] * 10 ** -9) * (10 ** -3)) / (
-    np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] * (1.6726 * 10 ** -27)))
-Desired_Table['VaN'] = ((Desired_Table['Bn'] * 10 ** -9) * (10 ** -3)) / (
-    np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] * (1.6726 * 10 ** -27)))
+Desired_Table['Alfvén_speed'] = ((Desired_Table['|B|'] * 10 ** -9)*(10**-3) ) / (np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] *(1.6726 * 10 ** -27)))
+Desired_Table['VaR'] = ((Desired_Table['Br'] * 10 ** -9)*(10**-3) ) / (np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] *(1.6726 * 10 ** -27)))
+Desired_Table['VaT'] = ((Desired_Table['Bt'] * 10 ** -9)*(10**-3) ) / (np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] *(1.6726 * 10 ** -27)))
+Desired_Table['VaN'] = ((Desired_Table['Bn'] * 10 ** -9)*(10**-3) ) / (np.sqrt(4 * np.pi * (10 ** -7) * Desired_Table['n1'] *(1.6726 * 10 ** -27)))
 Desired_Table['Pressure'] = ((Desired_Table['|B|'] * 10 ** -9) ** 2) / (2 * 4 * np.pi * (10 ** -7))
-Desired_Table['electron_gyrofrequency'] = ((1.6 * 10 ** -19) * Desired_Table['|B|'] * 10 ** -9) / (
-            (9.1094 * 10 ** -31) * 3 * 10 ** 8)
+Desired_Table['electron_gyrofrequency'] = ((1.6 * 10 ** -19) * Desired_Table['|B|'] * 10 ** -9) / ((9.1094 * 10 ** -31) * 3 * 10 ** 8)
 Desired_Table['ion_gyrofrequency'] = ((1.6 * 10 ** -19) * Desired_Table['|B|'] * 10 ** -9) / ((1.6726 * 10 ** -27))
 Desired_Table['ion_gyroradius'] = Desired_Table['Thermal speed'] / Desired_Table['ion_gyrofrequency']
-Desired_Table['PlasmaBeta'] = (Desired_Table['n1'] * (1.38064852 * 10 ** (-23)) * Desired_Table['Temperature']) / (
-    Desired_Table['Pressure'])
-Desired_Table['ion_plasma_frequency'] = np.sqrt(
-    (Desired_Table['n1'] * ((1.6 * 10 ** -19) ** 2)) / (((1.6726 * 10 ** -27)) * (8.85418782 * (10 ** -12))))
-Desired_Table['Total_Pressure'] = (Desired_Table['n1'] * (1.38064852 * 10 ** (-23)) * Desired_Table['Temperature']) + \
-Desired_Table['Pressure']
+Desired_Table['PlasmaBeta'] = (Desired_Table['n1'] * (1.38064852 * 10 ** (-23)) * Desired_Table['Temperature']) / (Desired_Table['Pressure'])
+Desired_Table['ion_plasma_frequency'] = np.sqrt((Desired_Table['n1'] * ((1.6 * 10 ** -19) ** 2)) / (((1.6726 * 10 ** -27)) * (8.85418782 * (10 ** -12))))
+Desired_Table['Total_Pressure'] = (Desired_Table['n1'] * (1.38064852 * 10 ** (-23)) * Desired_Table['Temperature']) + Desired_Table['Pressure']
 Desired_Table['ion_inertial_length'] = (3 * 10 ** 8) / Desired_Table['ion_plasma_frequency']
 
 # HOWTOFIND Magnetic reconnexion events
@@ -229,8 +212,7 @@ sigmac = pd.DataFrame(sigmac, columns=['sigmac'])
 Desired_Table = pd.concat([Desired_Table, sigmac], axis=1)
 
 # Define parameters to select the events(here the fluctuations of DeltaVR have to be >1/2*Alfvén speed and the fluctuations for at least one component of Magnetic field has to be >20nT
-Drop_Grouped = Drop_Grouped.loc[(Drop_Grouped['DeltaVR'] > 1 / 2 * Drop_Grouped['Alfvén_speed']) & (
-            (Drop_Grouped['DeltaBr'] > 20) | (Drop_Grouped['DeltaBt'] > 20) | (Drop_Grouped['DeltaBn'] > 20))]
+Drop_Grouped = Drop_Grouped.loc[(Drop_Grouped['DeltaVR'] > 1 / 2 * Drop_Grouped['Alfvén_speed']) & ((Drop_Grouped['DeltaBr'] > 20) | (Drop_Grouped['DeltaBt'] > 20) | (Drop_Grouped['DeltaBn'] > 20))]
 
 # Print the number of events without grouping them
 print('nombre d évenements', len(Drop_Grouped))
@@ -270,46 +252,26 @@ for values in Drop_Grouped_60s.index:
         ax.yaxis.set_major_locator(yticks)
         ax.tick_params(axis='y', labelsize=8)
     # Plot variables
-    axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='purple')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Br'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='red', label='Br')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bt'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='Bt')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bn'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='green', label='Bn')
-    axes[2].plot_date(MR_Time['Absolute_Time'], MR_Time['VR'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='black')
-    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VT'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='VT')
-    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VN'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='orange', label='VN')
-    axes[4].plot_date(MR_Time['Absolute_Time'], MR_Time['n1'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='brown')
-    axes[5].plot_date(MR_Time['Absolute_Time'], MR_Time['Temperature'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='red')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['Alfvén_speed'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='black', label='|Va|')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaR'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='red', label='VaR')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaT'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='VaT')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaN'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='orange', label='VaN')
-    axes[7].plot_date(MR_Time['Absolute_Time'], MR_Time['PlasmaBeta'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='cyan')
-    axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='orange')
-    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
-                    width=0.001)
-    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
-                    width=0.001)
-    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
-                       color='red')
-    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
-                    width=0.001)
-    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
-                    width=0.001)
+    axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,color='purple')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Br'], linestyle='solid', linewidth=1, markersize=0.000001,color='red', label='Br')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bt'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='Bt')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bn'], linestyle='solid', linewidth=1, markersize=0.000001,color='green', label='Bn')
+    axes[2].plot_date(MR_Time['Absolute_Time'], MR_Time['VR'], linestyle='solid', linewidth=1, markersize=0.000001,color='black')
+    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VT'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='VT')
+    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VN'], linestyle='solid', linewidth=1, markersize=0.000001,color='orange', label='VN')
+    axes[4].plot_date(MR_Time['Absolute_Time'], MR_Time['n1'], linestyle='solid', linewidth=1, markersize=0.000001,color='brown')
+    axes[5].plot_date(MR_Time['Absolute_Time'], MR_Time['Temperature'], linestyle='solid', linewidth=1,markersize=0.000001, color='red')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['Alfvén_speed'], linestyle='solid', linewidth=1,markersize=0.000001, color='black', label='|Va|')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaR'], linestyle='solid', linewidth=1, markersize=0.000001, color='red', label='VaR')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaT'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='VaT')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaN'], linestyle='solid', linewidth=1, markersize=0.000001,color='orange', label='VaN')
+    axes[7].plot_date(MR_Time['Absolute_Time'], MR_Time['PlasmaBeta'], linestyle='solid', linewidth=1, markersize=0.000001, color='cyan')
+    axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1, markersize=0.000001, color='orange')
+    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',width=0.001)
+    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv', width=0.001)
+    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,color='red')
+    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',width=0.001)
+    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',width=0.001)
     # Legend the plots for when there are several datas plotted at the same time in the same graph
     axes[1].legend(loc='upper right', prop={"size": 7})
     axes[3].legend(loc='upper right', prop={"size": 7})
@@ -354,46 +316,26 @@ for values in Drop_Grouped_60s.index:
         yticks = matplotlib.ticker.MaxNLocator(6, min_n_ticks=5)
         ax.yaxis.set_major_locator(yticks)
         ax.tick_params(axis='y', labelsize=8)
-       axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='purple')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Br'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='red', label='Br')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bt'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='Bt')
-    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bn'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='green', label='Bn')
-    axes[2].plot_date(MR_Time['Absolute_Time'], MR_Time['VR'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='black')
-    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VT'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='VT')
-    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VN'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='orange', label='VN')
-    axes[4].plot_date(MR_Time['Absolute_Time'], MR_Time['n1'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='brown')
-    axes[5].plot_date(MR_Time['Absolute_Time'], MR_Time['Temperature'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='red')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['Alfvén_speed'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='black', label='|Va|')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaR'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='red', label='VaR')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaT'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='blue', label='VaT')
-    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaN'], linestyle='solid', linewidth=1, markersize=0.000001,
-                      color='orange', label='VaN')
-    axes[7].plot_date(MR_Time['Absolute_Time'], MR_Time['PlasmaBeta'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='cyan')
-    axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1,
-                      markersize=0.000001, color='orange')
-    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv',
-                    width=0.001)
-    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',
-                    width=0.001)
-    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,
-                       color='red')
-    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',
-                    width=0.001)
-    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv',
-                    width=0.001)
+    axes[0].plot_date(MR_Time['Absolute_Time'], MR_Time['|B|'], linestyle='solid', linewidth=1, markersize=0.000001,color='purple')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Br'], linestyle='solid', linewidth=1, markersize=0.000001,color='red', label='Br')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bt'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='Bt')
+    axes[1].plot_date(MR_Time['Absolute_Time'], MR_Time['Bn'], linestyle='solid', linewidth=1, markersize=0.000001,color='green', label='Bn')
+    axes[2].plot_date(MR_Time['Absolute_Time'], MR_Time['VR'], linestyle='solid', linewidth=1, markersize=0.000001,color='black')
+    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VT'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='VT')
+    axes[3].plot_date(MR_Time['Absolute_Time'], MR_Time['VN'], linestyle='solid', linewidth=1, markersize=0.000001,color='orange', label='VN')
+    axes[4].plot_date(MR_Time['Absolute_Time'], MR_Time['n1'], linestyle='solid', linewidth=1, markersize=0.000001, color='brown')
+    axes[5].plot_date(MR_Time['Absolute_Time'], MR_Time['Temperature'], linestyle='solid', linewidth=1,markersize=0.000001, color='red')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['Alfvén_speed'], linestyle='solid', linewidth=1,markersize=0.000001, color='black', label='|Va|')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaR'], linestyle='solid', linewidth=1, markersize=0.000001,color='red', label='VaR')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaT'], linestyle='solid', linewidth=1, markersize=0.000001,color='blue', label='VaT')
+    axes[6].plot_date(MR_Time['Absolute_Time'], MR_Time['VaN'], linestyle='solid', linewidth=1, markersize=0.000001,color='orange', label='VaN')
+    axes[7].plot_date(MR_Time['Absolute_Time'], MR_Time['PlasmaBeta'], linestyle='solid', linewidth=1, markersize=0.000001, color='cyan')
+    axes[8].plot_date(MR_Time['Absolute_Time'], MR_Time['Total_Pressure'], linestyle='solid', linewidth=1,markersize=0.000001, color='orange')
+    axes[9].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaT'], angles='uv', width=0.001)
+    axes[10].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVaR'], MR_Time['DeltaVaN'], angles='uv',width=0.001)
+    axes[11].plot_date(MR_Time['Absolute_Time'], MR_Time['sigmac'], linestyle='solid', linewidth=1, markersize=0.000001,color='red')
+    axes[12].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVT'], angles='uv',width=0.001)
+    axes[13].quiver(MR_Time['Absolute_Time'], MR_Time['Zero'], MR_Time['DeltaVR'], MR_Time['DeltaVN'], angles='uv', width=0.001)
     # Legend the plots for when there are several datas plotted at the same time in the same graph
     axes[1].legend(loc='upper right', prop={"size": 7})
     axes[3].legend(loc='upper right', prop={"size": 7})
@@ -431,46 +373,26 @@ for nn, ax in enumerate(graph):
     ax.xaxis.set_major_locator(locator)
     ax.tick_params(axis='y', labelsize=8)
 
-graph[0].plot_date(Desired_Table['Absolute_Time'], Desired_Table['|B|'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='purple')
-graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Br'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='red', label='Br')
-graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Bt'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, label='Bt')
-graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Bn'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, label='Bn')
-graph[2].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VR'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='black')
-graph[3].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VT'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='blue', label='VT')
-graph[3].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VN'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='orange', label='VN')
-graph[4].plot_date(Desired_Table['Absolute_Time'], Desired_Table['n1'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='brown')
-graph[5].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Temperature'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='red')
-graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Alfvén_speed'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='black', label='|Va|')
-graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaR'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='red', label='VaR')
-graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaT'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='blue', label='VaT')
-graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaN'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='orange', label='VaN')
-graph[7].plot_date(Desired_Table['Absolute_Time'], Desired_Table['PlasmaBeta'], linestyle='solid', linewidth=0.2,
-                   markersize=0.0001, color='cyan')
-graph[8].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Total_Pressure'], linestyle='solid', linewidth=0.2,
-                   markersize=0.000001, color='orange')
-graph[9].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
-                 Desired_Table['DeltaVaT'], angles='uv', width=0.001)
-graph[10].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],
-                 Desired_Table['DeltaVaN'], angles='uv', width=0.001)
-graph[11].plot_date(Desired_Table['Absolute_Time'], Desired_Table['sigmac'], linestyle='solid', linewidth=0.01,
-                    markersize=0.000001, color='red')
-graph[12].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
-                 Desired_Table['DeltaVT'], angles='uv')
-graph[13].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],
-                 Desired_Table['DeltaVN'], angles='uv')
+graph[0].plot_date(Desired_Table['Absolute_Time'], Desired_Table['|B|'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='purple')
+graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Br'], linestyle='solid', linewidth=0.2, markersize=0.000001, color='red', label='Br')
+graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Bt'], linestyle='solid', linewidth=0.2,markersize=0.000001, label='Bt')
+graph[1].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Bn'], linestyle='solid', linewidth=0.2,markersize=0.000001, label='Bn')
+graph[2].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VR'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='black')
+graph[3].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VT'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='blue', label='VT')
+graph[3].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VN'], linestyle='solid', linewidth=0.2, markersize=0.000001, color='orange', label='VN')
+graph[4].plot_date(Desired_Table['Absolute_Time'], Desired_Table['n1'], linestyle='solid', linewidth=0.2, markersize=0.000001, color='brown')
+graph[5].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Temperature'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='red')
+graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Alfvén_speed'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='black', label='|Va|')
+graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaR'], linestyle='solid', linewidth=0.2, markersize=0.000001, color='red', label='VaR')
+graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaT'], linestyle='solid', linewidth=0.2, markersize=0.000001, color='blue', label='VaT')
+graph[6].plot_date(Desired_Table['Absolute_Time'], Desired_Table['VaN'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='orange', label='VaN')
+graph[7].plot_date(Desired_Table['Absolute_Time'], Desired_Table['PlasmaBeta'], linestyle='solid', linewidth=0.2, markersize=0.0001, color='cyan')
+graph[8].plot_date(Desired_Table['Absolute_Time'], Desired_Table['Total_Pressure'], linestyle='solid', linewidth=0.2,markersize=0.000001, color='orange')
+graph[9].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'],Desired_Table['DeltaVaT'], angles='uv', width=0.001)
+graph[10].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVaR'], Desired_Table['DeltaVaN'], angles='uv', width=0.001)
+graph[11].plot_date(Desired_Table['Absolute_Time'], Desired_Table['sigmac'], linestyle='solid', linewidth=0.01,markersize=0.000001, color='red')
+graph[12].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'],Desired_Table['DeltaVT'], angles='uv')
+graph[13].quiver(Desired_Table['Absolute_Time'], Desired_Table['Zero'], Desired_Table['DeltaVR'], Desired_Table['DeltaVN'], angles='uv')
 
 graph[1].legend(loc='upper right', prop={"size": 7})
 graph[3].legend(loc='upper right', prop={"size": 7})
