@@ -79,23 +79,6 @@ df_magnetic_field_modified4 = df_time4.join(df_magnetic_field_modified4)
 final_df = pd.concat([df_magnetic_field_modified1, df_magnetic_field_modified2, df_magnetic_field_modified3,
                       df_magnetic_field_modified4], ignore_index=True)
 final_df = final_df.set_index(final_df['Time'])
-# concatenate the dataframe of time and magnetic field and merge dataframes together to get the dataframe for the day
-
-df_time1 = pd.DataFrame(pd.to_datetime(cdf1['epoch_mag_RTN']), columns=['Time_datetime'])
-df_time1['Time'] = df_time1['Time_datetime']
-df_magnetic_field_modified1 = df_time1.join(df_magnetic_field_modified1)
-df_time2 = pd.DataFrame(pd.to_datetime(cdf2['epoch_mag_RTN']), columns=['Time_datetime'])
-df_time2['Time'] = df_time2['Time_datetime']
-df_magnetic_field_modified2 = df_time2.join(df_magnetic_field_modified2)
-df_time3 = pd.DataFrame(pd.to_datetime(cdf3['epoch_mag_RTN']), columns=['Time_datetime'])
-df_time3['Time'] = df_time3['Time_datetime']
-df_magnetic_field_modified3 = df_time3.join(df_magnetic_field_modified3)
-df_time4 = pd.DataFrame(pd.to_datetime(cdf4['epoch_mag_RTN']), columns=['Time_datetime'])
-df_time4['Time'] = df_time4['Time_datetime']
-df_magnetic_field_modified4 = df_time4.join(df_magnetic_field_modified4)
-final_df = pd.concat([df_magnetic_field_modified1, df_magnetic_field_modified2, df_magnetic_field_modified3,
-                      df_magnetic_field_modified4], ignore_index=True)
-final_df = final_df.set_index(final_df['Time'])
 
 # Transform the time datas,velocity,density and thermal speed to dataframe with the correct units
 
